@@ -105,8 +105,8 @@ AND dept_name IN
    WHERE dept_name IN ('Sales')
    );
 
---List all employees in the Sales and Development departments, 
---including their employee number, last name, first name, and department name.
+---List all employees in the Sales and Development departments, 
+---including their employee number, last name, first name, and department name.
 SELECT emp_nopk, last_name, first_name, dept_name
 FROM employees, departments, dept_emp
 WHERE employees.emp_noPK = dept_emp.emp_no
@@ -118,8 +118,8 @@ AND dept_name IN
 );
 
 
---In ascending order, list the frequency count of employee last names, 
---i.e., how many employees share each last name.
+---In ascending order, list the frequency count of employee last names, 
+---i.e., how many employees share each last name.
 SELECT last_name, 
 COUNT(last_name) AS "Total_Employee" 
 FROM employees 
