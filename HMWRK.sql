@@ -7,12 +7,15 @@
   
      CREATE TABLE departments (
   dept_no VARCHAR(20) NOT NULL,
-  dept_name VARCHAR(30));
+  dept_name VARCHAR(30)NOT NULL, 
+  CONSTRAINT "pk_departments" PRIMARY KEY (
+        "dept_no")
+        );
          SELECT * FROM departments;
 
     CREATE TABLE dept_manager (
   dept_no VARCHAR(20) NOT NULL,
-  emp_no INT NOT NULL,
+  emp_no VARCHAR(20) NOT NULL,
   from_date VARCHAR(30)NOT NULL,
   to_date VARCHAR(30) NOT NULL);
 	   SELECT * FROM dept_manager;
@@ -32,7 +35,8 @@
   first_name VARCHAR(30)NOT NULL,
   last_name VARCHAR(30) NOT NULL,
   gender VARCHAR(10),
-  hire_date VARCHAR(20));
+  hire_date VARCHAR(20)
+  );
       SELECT * FROM employees;
 
 
@@ -52,12 +56,14 @@
   to_date VARCHAR(30) NOT NULL);
         SELECT * FROM titles;
   
+  
+  
 --ALTERATIONS
 	ALTER TABLE employees 
     RENAME COLUMN emp_no TO emp_nopk;
 
     ALTER TABLE departments 
-    RENAME COLUMN dept_no TO dept_noPK;
+    RENAME COLUMN dept_no TO dept_nopk;
 	
 ---List the following details of each employee: employee number, 
 --last name, first name, gender, and salary.
@@ -76,14 +82,14 @@ where hire_date BETWEEN '1986-12-31' AND '1988-01-01';
 SELECT dept_no, dept_name, emp_no, last_name, first_name, from_date, to_date
 FROM dept_manager, departments, employees
 WHERE employees.emp_nopk=dept_manager.emp_no
-AND departments.dept_no=dept_manager.dept_no;
+AND departments.dept_nopk=dept_manager.dept_no;
 
 ---List the department of each employee with the following information: 
 ---employee number, last name, first name, and department name.
 SELECT emp_nopk, last_name, first_name, dept_name
 FROM employees, departments, dept_emp
-WHERE employees.emp_noPK = dept_emp.emp_no
-AND departments.dept_noPK = dept_emp.dept_no;
+WHERE employees.emp_nopk = dept_emp.emp_no
+AND departments.dept_nopk = dept_emp.dept_no;
 
 
 ---List all employees whose first name is "Duangkaew" and 
@@ -109,8 +115,8 @@ AND dept_name IN
 ---including their employee number, last name, first name, and department name.
 SELECT emp_nopk, last_name, first_name, dept_name
 FROM employees, departments, dept_emp
-WHERE employees.emp_noPK = dept_emp.emp_no
-AND departments.dept_noPK = dept_emp.dept_no
+WHERE employees.emp_nopk = dept_emp.emp_no
+AND departments.dept_nopk = dept_emp.dept_no
 AND dept_name IN
    (SELECT dept_name
    FROM departments
@@ -125,6 +131,4 @@ COUNT(last_name) AS "Total_Employee"
 FROM employees 
 GROUP BY last_name
 ORDER BY "last_name" ASC;
-
-
 
